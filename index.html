@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Curated open source contributions by Dulmini Munasinghe." />
+    <title>Dulmini Munasinghe - Open Source Contributions</title>
+    <style>
+      :root {
+        /* Professional Light Theme - Full Width Layout */
+        --bg: #f9f9f9;
+        --panel: #ffffff;
+        --panel-soft: #f4f4f5;
+        --text: #09090b;
+        --muted: #71717a;
+        --line: #e4e4e7;
+        --accent: #18181b;
+        --accent-strong: #000000;
+        --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      /* Full Width Container */
+      .shell {
+        width: 95%;
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+
+      /* Sticky Professional Navbar */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+        padding: 12px 0;
+      }
+
+      .navbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-identity { display: flex; align-items: center; gap: 12px; }
+      .nav-avatar { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); }
+      .nav-info { display: flex; flex-direction: column; line-height: 1.2; }
+      .nav-name { font-weight: 700; font-size: 0.95rem; }
+      .nav-handle { font-size: 0.8rem; color: var(--muted); }
+      .nav-controls { display: flex; align-items: center; gap: 16px; }
+
+      .search {
+        width: 300px;
+        height: 36px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--panel);
+        font-size: 0.85rem;
+      }
+
+      .filters { display: flex; gap: 4px; background: var(--panel-soft); padding: 3px; border-radius: 6px; border: 1px solid var(--line); }
+      .filter { height: 30px; padding: 0 12px; border: none; background: transparent; cursor: pointer; border-radius: 4px; font-weight: 500; font-size: 0.8rem; display: flex; align-items: center; gap: 4px; }
+      .filter.is-active { background: var(--panel); box-shadow: var(--shadow); font-weight: 600; }
+
+      /* Main Content Layout */
+      main { padding: 32px 0 64px; }
+
+      .repo-section {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+      }
+
+      .repo-header { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+      .repo-name { display: inline-flex; gap: 10px; align-items: center; font-weight: 600; font-size: 1.15rem; }
+      .repo-name img { border: 1px solid var(--line); border-radius: 6px; }
+      .repo-header > div:first-child p { margin: 10px 0 0; color: var(--muted); font-size: 0.9rem; }
+      .repo-stats { display: flex; gap: 8px; align-items: center; }
+      .repo-stats span { padding: 4px 10px; background: var(--panel-soft); border: 1px solid var(--line); border-radius: 6px; font-size: 0.8rem; font-weight: 500; }
+
+      /* Contribution Details */
+      .contribution-list { display: grid; gap: 16px; margin-top: 20px; }
+      .contribution { padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-soft); }
+      .pr-title { font-weight: 600; font-size: 1.05rem; display: block; margin-bottom: 8px; }
+
+      .description-details {
+        margin-top: 12px;
+        cursor: pointer;
+      }
+
+      .description-details summary {
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 600;
+        list-style: none;
+        user-select: none;
+        padding: 8px 0;
+      }
+
+      .description-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .description-details[open] summary {
+        margin-bottom: 8px;
+      }
+
+      .description { 
+        display: grid;
+        gap: 10px;
+        margin-top: 12px; 
+        font-size: 0.9rem; 
+        color: var(--muted);
+        padding: 14px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      .description p { margin: 0 0 8px; }
+      .description p:last-child { margin-bottom: 0; }
+      .description h4 { margin: 16px 0 8px; font-size: 0.95rem; color: var(--text); }
+      .description ul { margin: 8px 0; padding-left: 20px; }
+      .description li { margin: 4px 0; }
+      .description code { background: #eee; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 0.88em; }
+      .description img { max-width: 100%; border-radius: 6px; border: 1px solid var(--line); margin-top: 12px; }
+
+      .markdown-table-wrap { margin-top: 12px; border: 1px solid var(--line); border-radius: 6px; overflow-x: auto; background: var(--panel); }
+      .markdown-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+      .markdown-table th, .markdown-table td { padding: 10px; border: 1px solid var(--line); text-align: left; }
+      .markdown-table th { background: var(--panel-soft); font-weight: 600; }
+
+      .impact-note {
+        margin-top: 12px;
+        padding: 12px 16px;
+        background: #fff9e6;
+        border-left: 3px solid #ffc107;
+        border-radius: 6px;
+        font-size: 0.9rem;
+      }
+
+      .impact-note strong {
+        color: var(--accent-strong);
+      }
+
+      .reviewed-by { 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+        margin-top: 16px; 
+        padding-top: 14px; 
+        border-top: 1px solid var(--line); 
+        font-size: 0.88rem; 
+        color: var(--muted);
+      }
+      .reviewers { display: flex; gap: 4px; }
+      .reviewers img { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); }
+      .merged-by { color: var(--accent); font-weight: 500; }
+
+      .meta-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+      .meta-row span { padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; font-weight: 500; background: var(--panel); }
+      .meta-row strong { font-weight: 600; margin-right: 4px; }
+
+      .labels { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+      .labels span { padding: 3px 8px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+
+      .empty { 
+        padding: 48px; 
+        text-align: center; 
+        border: 1px dashed var(--line); 
+        border-radius: 8px;
+        color: var(--muted);
+      }
+
+      footer {
+        padding: 24px 0;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 768px) {
+        .navbar-inner { flex-direction: column; gap: 16px; }
+        .nav-controls { width: 100%; flex-direction: column; }
+        .search { width: 100%; }
+        .repo-header { flex-direction: column; }
+        .repo-stats { justify-content: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="shell navbar-inner">
+        <div class="nav-identity">
+          <img class="nav-avatar" src="https://github.com/Dasunika0216.png" alt="Dulmini Munasinghe" />
+          <div class="nav-info">
+            <span class="nav-name">Dulmini Munasinghe</span>
+            <span class="nav-handle"><a href="https://github.com/Dasunika0216">@Dasunika0216</a></span>
+          </div>
+        </div>
+        <div class="nav-controls">
+          <input class="search" id="search" type="search" placeholder="Search contributions..." />
+          <div class="filters" id="filters-container"></div>
+        </div>
+      </div>
+    </nav>
+    <main class="shell">
+      <div id="results">
+        <section class="repo-section" data-repo="asyncapi/website" data-languages="TypeScript">
+            <header class="repo-header">
+              <div>
+                <a class="repo-name" href="https://github.com/asyncapi/website">
+                  <img src="https://github.com/asyncapi.png" alt="" width="28" height="28" />
+                  asyncapi/website
+                </a>
+                <p>AsyncAPI specification website</p>
+              </div>
+              <div class="repo-stats">
+                <span>707 stars</span>
+                <span>5 PRs</span>
+              </div>
+            </header>
+            <div class="contribution-list">
+              <article class="contribution" data-title="fix: add filter to invert documentation diagrams in dark mode" data-language="TypeScript">
+                <a class="pr-title" href="https://github.com/asyncapi/website/pull/5527">fix: add filter to invert documentation diagrams in dark mode</a>
+                
+                <details class="description-details">
+                  <summary>📝 <strong>See description</strong></summary>
+                  <div class="description"><p>refs - https://github.com/asyncapi/website/issues/5465#issuecomment-4586415133<br /><br /><strong>Description:</strong><br /><br />- Added CSS rules in <code>styles/globals.css</code> to invert the colors of diagram images (SNS-SQS-Pub-Sub.png, SNS-HTTP.png, SQS-Point-To-Point.png) when the website is in dark mode in <code>/docs/reference/bindings/3.0.0</code> and <code>/docs/reference/bindings/2.x.x</code>.<br /><br /><strong>Steps to Reproduce:</strong><br /><br />1. Navigate to the SNS bindings reference page at <code>/docs/reference/bindings/3.0.0</code> or <code>/docs/reference/bindings/2.x.x</code>.<br />2. Toggle the website theme to dark mode.<br />3. Scroll down to the &quot;SNS to SQS Pub-Sub&quot; or &quot;SNS to HTTP Pub Sub&quot; or &quot;&quot; example sections.<br />4. Notice that the architecture diagram images now display with white text labels that are clearly readable against the dark background.<br /><br /><strong>Screenshots:</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/ef73bdf1-4465-4fc9-b6aa-101064def1ec" alt="SNS diagram before 1" width="600" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/367c2845-fc0c-494c-a7f3-03d9c5e9dcaa" alt="SNS diagram after 1" width="600" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/7dcb56e3-eece-44a0-b447-487ac56c70c7" alt="SNS diagram before 2" width="600" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/8563e064-c817-4614-a3ac-6a70fa85d47b" alt="SNS diagram after 2" width="600" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/ca8aaca8-edbb-4430-892e-84e62bf56876" alt="SNS diagram before 3" width="600" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/08382ca9-6c21-4f15-a276-75e06b953cce" alt="SNS diagram after 3" width="600" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/b458f50a-7834-4a9f-91f2-ef15f7112610" alt="SNS diagram before 4" width="600" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/53aa568f-ab4e-4c57-ab2e-859fd3c49279" alt="SNS diagram after 4" width="600" loading="lazy" /> |</p></div>
+                </details>
+                
+                <div class="reviewed-by">
+                  <span>✅ Approved by</span>
+                  <div class="reviewers"><a href="https://github.com/princerajpoot20" title="princerajpoot20"><img src="https://avatars.githubusercontent.com/u/44585452?u=fa0f6a137d8f8613707cc500dbbc19066be78bd8&amp;v=4" alt="princerajpoot20" width="24" height="24" /></a></div>
+                </div>
+                
+                
+                <div class="meta-row">
+                  <span><strong>Merged</strong>May 31, 2026</span>
+                  <span><strong>Language</strong>TypeScript</span>
+                  <span><strong>Changes</strong>+7 / -0</span>
+                  <span><strong>Files</strong>1</span>
+                </div>
+                
+                
+              </article><article class="contribution" data-title="fix: improve dashboard tooltip and filter responsiveness" data-language="TypeScript">
+                <a class="pr-title" href="https://github.com/asyncapi/website/pull/5519">fix: improve dashboard tooltip and filter responsiveness</a>
+                
+                <details class="description-details">
+                  <summary>📝 <strong>See description</strong></summary>
+                  <div class="description"><p>ref - https://github.com/asyncapi/website/pull/5253#issuecomment-4567873219<br /><br />### <strong>Description:</strong><br /><br />- Fixed the &quot;Is this your first contribution?&quot; tooltip in <code>GoodFirstIssuesTip</code> displaying issue and fixed overflowing and clipping off-screen on mobile viewports.<br />- Added <code>w-[calc(100vw-2rem)]</code> to the tooltip card to ensure it never exceeds the available screen width, providing a safe margin on each side for narrow devices.<br />- Fixed the &quot;Filter Issues&quot; section in <code>Filters</code> overflowing on smaller screen sizes.<br />- Improved the filter icon&#39;s dark mode appearance.<br /><br />### <strong>Steps to Reproduce:</strong><br /><br />1. Navigate to the <code>/community/dashboard</code> page.<br />2. Hover over the <strong>&quot;?&quot;</strong> question mark icon next to the &quot;Good First Issues&quot; heading.<br />3. Observe that the &quot;Is this your first contribution?&quot; card now displays properly.<br />4. Resize the browser to a mobile viewport or use DevTools device emulation.<br />5. Hover over the <strong>&quot;?&quot;</strong> question mark icon again.<br />6. Observe that the &quot;Is this your first contribution?&quot; card now stays fully within the viewport instead of clipping off the left edge.<br />7. Click the <strong>filter icon</strong> on the right side of the &quot;Good First Issues&quot; heading.<br />8. Observe that the &quot;Filter Issues&quot; section now appears correctly within the viewport on mobile without overflowing.<br />9. Toggle to <strong>dark mode</strong> and repeat steps 2-8 to verify both cards render correctly in both themes.<br /><br />### <strong>Screenshots:</strong><br /><br /><strong>Good First Issues Tooltip (Desktop)</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/567b0445-ba12-413a-89bf-b7da46eb39de" alt="Tooltip Before Desktop Light" width="420" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/f5dd9f52-4bd8-496a-82d9-cfa37cd0aa28" alt="Tooltip After Desktop Light" width="420" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/5abacfa7-d3db-4d6b-8f0d-c8d511d01478" alt="Tooltip Before Desktop Dark" width="420" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/b7b1410b-df85-40f5-8ed8-35c70de1bd68" alt="Tooltip After Desktop Dark" width="420" loading="lazy" /> |<br /><br /><strong>Good First Issues Tooltip (Mobile)</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/532c3873-33a9-4240-ae60-c35749b43860" alt="Tooltip Before Mobile Light" width="260" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/8a5ec092-1794-4f80-838d-087f5a5f696b" alt="Tooltip After Mobile Light" width="260" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/7efd6c11-3e98-4848-b925-afb980c089a0" alt="Tooltip Before Mobile Dark" width="260" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/0bf4359f-daf6-49df-b149-55f8abdb2dd4" alt="Tooltip After Mobile Dark" width="260" loading="lazy" /> |<br /><br /><strong>Filter Issues Section (Mobile)</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/10000951-4380-48d4-ab71-e441a200f5f8" alt="Filter Before Mobile Light" width="260" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/a7c2f8e1-8768-43f7-bf3e-d930a295f315" alt="Filter After Mobile Light" width="260" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/4298dad7-8275-4119-a04a-e31d9f3ea818" alt="Filter Before Mobile Dark" width="260" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/8294255b-9f23-49e3-921d-c07ca75fe280" alt="Filter After Mobile Dark" width="260" loading="lazy" /> |</p><h4>Summary by CodeRabbit</h4><ul><li><strong>Bug Fixes</strong></li><li>Improved tooltip positioning to better handle viewport boundaries and responsive layouts</li><li>Enhanced filter menu positioning behavior for improved screen adaptation</li></ul><ul><li><strong>Style</strong></li><li>Refined filter button icon styling and visibility</li></ul><p><a href="https://app.coderabbit.ai/change-stack/asyncapi/website/pull/5519?utm_source=github_walkthrough&amp;utm_medium=github&amp;utm_campaign=change_stack"><img src="https://storage.googleapis.com/coderabbit_public_assets/review-stack-in-coderabbit-ui.svg" alt="Review Change Stack" loading="lazy" /></a></p></div>
+                </details>
+                
+                <div class="reviewed-by">
+                  <span>✅ Approved by</span>
+                  <div class="reviewers"><a href="https://github.com/princerajpoot20" title="princerajpoot20"><img src="https://avatars.githubusercontent.com/u/44585452?u=fa0f6a137d8f8613707cc500dbbc19066be78bd8&amp;v=4" alt="princerajpoot20" width="24" height="24" /></a></div>
+                </div>
+                
+                
+                <div class="meta-row">
+                  <span><strong>Merged</strong>May 29, 2026</span>
+                  <span><strong>Language</strong>TypeScript</span>
+                  <span><strong>Changes</strong>+9 / -10</span>
+                  <span><strong>Files</strong>2</span>
+                </div>
+                
+                
+              </article><article class="contribution" data-title="fix: remove unwanted white background from FlyoutMenu component" data-language="TypeScript">
+                <a class="pr-title" href="https://github.com/asyncapi/website/pull/5511">fix: remove unwanted white background from FlyoutMenu component</a>
+                
+                <details class="description-details">
+                  <summary>📝 <strong>See description</strong></summary>
+                  <div class="description"><p>ref - https://github.com/asyncapi/website/pull/5253#issuecomment-4567131374<br /><br /><strong>Description:</strong><br /><br />- Removed the <code>bg-white</code> utility class from the outermost wrapper <code>&lt;div&gt;</code> of the <code>FlyoutMenu</code> component.<br />- Fixed a visual issue where a white rectangular block awkwardly appeared above the dropdown menu content.<br /><br /><strong>Steps to Reproduce:</strong><br /><br />1. Open the website and locate the main navigation bar.<br />2. Open a dropdown menu that uses the flyout component (e.g., click/hover on the &quot;Tools&quot; option).<br />3. Observe the space just above the opened dropdown container.<br />4. Notice that there is no longer a white block sitting on top of the menu; the gap is now perfectly transparent.<br />5. Toggle between light and dark themes to verify the gap properly remains transparent in both modes.<br /><br /><strong>Screenshots:</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/36055874-55c9-49a6-8e71-d43ab673c4c5" alt="Before Light" width="450" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/d667c643-f070-4f45-8920-1daae6ce78a7" alt="After Light" width="450" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/ecea4b99-805c-4126-84a8-c3bde8dd6858" alt="Before Dark" width="450" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/a372d7ce-4fec-4d1c-aece-9a2eddbaacd3" alt="After Dark" width="450" loading="lazy" /> |</p></div>
+                </details>
+                
+                <div class="reviewed-by">
+                  <span>✅ Approved by</span>
+                  <div class="reviewers"><a href="https://github.com/princerajpoot20" title="princerajpoot20"><img src="https://avatars.githubusercontent.com/u/44585452?u=fa0f6a137d8f8613707cc500dbbc19066be78bd8&amp;v=4" alt="princerajpoot20" width="24" height="24" /></a></div>
+                </div>
+                
+                
+                <div class="meta-row">
+                  <span><strong>Merged</strong>May 29, 2026</span>
+                  <span><strong>Language</strong>TypeScript</span>
+                  <span><strong>Changes</strong>+1 / -1</span>
+                  <span><strong>Files</strong>1</span>
+                </div>
+                
+                
+              </article><article class="contribution" data-title="fix: add dark mode text to FAQ list and About title." data-language="TypeScript">
+                <a class="pr-title" href="https://github.com/asyncapi/website/pull/5498">fix: add dark mode text to FAQ list and About title.</a>
+                
+                <details class="description-details">
+                  <summary>📝 <strong>See description</strong></summary>
+                  <div class="description"><p>refs: https://github.com/asyncapi/website/pull/5253#issuecomment-4556441703<br /><br /><strong>Description:</strong><br /><br />- Added the <code>dark:invert</code> utility class to the main heading inside the <code>GenericPostLayout</code> component to ensure generic page titles adapt correctly to dark mode.<br />- Added the <code>dark:text-white</code> utility class to the <code>FAQList</code> component.<br /><br /><strong>Steps to Reproduce (FAQ List):</strong><br /><br />1. Scroll down to the bottom of the <code>/about</code> page.<br />2. Ensure the website theme is toggled to dark mode.<br />3. Expand the &quot;Where can I find more information?&quot; question.<br />4. Notice that the bulleted text and the embedded links (e.g., &quot;Official AsyncAPI Documentation&quot;) are now correctly styled in white and easily readable.<br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/65aa1208-5361-4089-8067-6821ae93d5c8" alt="Before FAQ" width="400" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/2ba9b3d4-8b25-4f6e-80a5-cc5489de80f4" alt="After FAQ" width="400" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/5834ee87-973d-41ea-8aa9-de2fd6bd51dd" alt="Before FAQ Dark" width="400" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/d040dcdf-fc36-4aaf-b6ae-213d44df6825" alt="After FAQ Dark" width="400" loading="lazy" /> |<br /><br /><strong>Steps to Reproduce (&#39;About&#39; Screen title):</strong><br /><br />1. Navigate to <code>/about</code> page that uses the <code>GenericPostLayout</code>.<br />2. Toggle the website theme to dark mode.<br />3. Notice that the main page title (&quot;About&quot;) now properly inverts its color to remain readable against the dark background.<br /><br /><strong>Screenshots</strong><br /><br />| Before | After |<br />|--------|--------|<br />| <img src="https://github.com/user-attachments/assets/68ea6e69-66c7-4c46-b43b-315c10081477" alt="Before Light" width="400" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/d5b3c682-f9a2-4cdd-9b57-0543d668ad8d" alt="After Light" width="400" loading="lazy" /> |<br />| <img src="https://github.com/user-attachments/assets/a08248d1-7751-4a92-86b6-830e2c8bf903" alt="Before Dark" width="400" loading="lazy" /> | <img src="https://github.com/user-attachments/assets/5d270ffe-3cd9-437a-8e3a-fbf6d018a7da" alt="After Dark" width="400" loading="lazy" /> |<br /><br />Related issue(s)<br />Fixes: https://github.com/asyncapi/website/pull/5253#issuecomment-4556441703</p><h4>Summary by CodeRabbit</h4><ul><li><strong>Style</strong></li><li>Enhanced dark mode styling for FAQ answers section with consistent text color treatment across all link elements, list items, and content areas for improved visual contrast and readability</li><li>Refined dark mode styling for post layout section headings with enhanced visual appearance and presentation to ensure improved readability and consistent look in dark theme mode</li></ul><p><a href="https://app.coderabbit.ai/change-stack/asyncapi/website/pull/5498?utm_source=github_walkthrough&amp;utm_medium=github&amp;utm_campaign=change_stack"><img src="https://storage.googleapis.com/coderabbit_public_assets/review-stack-in-coderabbit-ui.svg" alt="Review Change Stack" loading="lazy" /></a></p></div>
+                </details>
+                
+                <div class="reviewed-by">
+                  <span>✅ Approved by</span>
+                  <div class="reviewers"><a href="https://github.com/princerajpoot20" title="princerajpoot20"><img src="https://avatars.githubusercontent.com/u/44585452?u=fa0f6a137d8f8613707cc500dbbc19066be78bd8&amp;v=4" alt="princerajpoot20" width="24" height="24" /></a></div>
+                </div>
+                
+                
+                <div class="meta-row">
+                  <span><strong>Merged</strong>May 27, 2026</span>
+                  <span><strong>Language</strong>TypeScript</span>
+                  <span><strong>Changes</strong>+4 / -4</span>
+                  <span><strong>Files</strong>2</span>
+                </div>
+                
+                
+              </article><article class="contribution" data-title="fix: invert question mark avatar in dark mode for CommunityLayout" data-language="TypeScript">
+                <a class="pr-title" href="https://github.com/asyncapi/website/pull/5487">fix: invert question mark avatar in dark mode for CommunityLayout</a>
+                
+                <details class="description-details">
+                  <summary>📝 <strong>See description</strong></summary>
+                  <div class="description"><p>refs: https://github.com/asyncapi/website/pull/5253#issuecomment-4540786056<br /><br /><strong>Description:</strong><br /><br />- Added the <code>dark:invert</code> utility class to the Question Mark avatar image (<code>/img/avatars/questionmark.webp</code>) inside the <code>QuestionCard</code> component.<br />- Fixed a visual issue where the question mark avatar was poorly visible in dark mode because its default colors blended in with the dark card background.<br /><br /><strong>Steps to Reproduce</strong><br /><br />1. Navigate to a community page that uses the <code>CommunityLayout</code> (/community/board`).<br />2. Toggle the website theme to dark mode.<br />3. Scroll down to the bottom of the members list to the &quot;Want to become a member?&quot; question card.<br />4. Notice that the question mark avatar is now properly inverted and readable against the dark background.<br /><br /><strong>Screenshots</strong><br /><br /><strong>Before:</strong><br /><img src="https://github.com/user-attachments/assets/f7180cd4-e700-4200-b366-d255406789f5" alt="Screenshot 2026-05-26 at 11 35 34" width="381" height="291" loading="lazy" /><br /><br /><strong>After:</strong><br /><img src="https://github.com/user-attachments/assets/e63301ad-51dd-4584-b2a7-b06219dedbf4" alt="Screenshot 2026-05-26 at 11 36 12" width="372" height="285" loading="lazy" /><br /><br /><strong>Related issue(s)</strong><br />Fixes: https://github.com/asyncapi/website/pull/5253#issuecomment-4540786056</p></div>
+                </details>
+                
+                <div class="reviewed-by">
+                  <span>✅ Approved by</span>
+                  <div class="reviewers"><a href="https://github.com/princerajpoot20" title="princerajpoot20"><img src="https://avatars.githubusercontent.com/u/44585452?u=fa0f6a137d8f8613707cc500dbbc19066be78bd8&amp;v=4" alt="princerajpoot20" width="24" height="24" /></a></div>
+                </div>
+                
+                
+                <div class="meta-row">
+                  <span><strong>Merged</strong>May 26, 2026</span>
+                  <span><strong>Language</strong>TypeScript</span>
+                  <span><strong>Changes</strong>+1 / -1</span>
+                  <span><strong>Files</strong>1</span>
+                </div>
+                
+                
+              </article>
+            </div>
+          </section>
+      </div>
+      <div class="empty" id="empty" hidden>No matching contributions found.</div>
+    </main>
+    <footer>
+      <div class="shell">
+        Updated Jun 3, 2026. Data available in <a href="contributions.json">contributions.json</a>.
+      </div>
+    </footer>
+    <script>
+      // Inject language filters
+      const filtersContainer = document.querySelector('#filters-container');
+      if (filtersContainer) {
+        filtersContainer.innerHTML = `<button class="filter is-active" data-language="all">All</button>
+       <button class="filter" data-language="TypeScript">TypeScript <span>5</span></button>`;
+      }
+
+      const search = document.querySelector('#search');
+      const filters = document.querySelectorAll('.filter');
+      const sections = document.querySelectorAll('.repo-section');
+      const empty = document.querySelector('#empty');
+      let activeLanguage = 'all';
+
+      function applyFilters() {
+        const query = search.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        sections.forEach((section) => {
+          const languages = section.dataset.languages.split('|');
+          const matchLang = activeLanguage === 'all' || languages.includes(activeLanguage);
+          const matchQuery = !query || section.textContent.toLowerCase().includes(query);
+
+          section.hidden = !(matchLang && matchQuery);
+          if (!section.hidden) visibleCount++;
+        });
+
+        empty.hidden = visibleCount !== 0;
+      }
+
+      if (search) {
+        search.addEventListener('input', applyFilters);
+      }
+
+      filters.forEach((filter) => {
+        filter.addEventListener('click', () => {
+          activeLanguage = filter.dataset.language;
+          filters.forEach((f) => f.classList.toggle('is-active', f === filter));
+          applyFilters();
+        });
+      });
+    </script>
+  </body>
+</html>
