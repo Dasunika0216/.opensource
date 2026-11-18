@@ -44,7 +44,7 @@ Undergraduate | Department of Computer Science and Engineering | University of M
 
 AsyncAPI specification website
 
-**5 contributions** • TypeScript • **★ 706**
+**5 contributions** • TypeScript • **★ 719**
 
 ---
 
@@ -316,7 +316,7 @@ Fixes: https://github.com/asyncapi/website/pull/5253#issuecomment-4540786056
 
 <div align="center">
 
-<sub>Last updated: June 23, 2026</sub>
+<sub>Last updated: November 18, 2026</sub>
 
 <br/>
 
